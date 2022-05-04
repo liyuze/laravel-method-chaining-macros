@@ -11,7 +11,7 @@ class MethodChainingMacros
     {
         /**
          * @param  int  $mode
-         * @return MethodChainingProxy<$this>|static
+         * @return \Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy<$this>|static
          */
         return function (int $mode = MethodChainingProxy::CALL_MODE_MIXED): MethodChainingProxy {
             return new MethodChainingProxy($this, $mode);
@@ -21,7 +21,7 @@ class MethodChainingMacros
     public function mixedChaining(): \Closure
     {
         /**
-         * @return MethodChainingProxy<$this>|static
+         * @return \Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy<$this>|static
          */
         return function (): MethodChainingProxy {
             return new MethodChainingProxy($this, MethodChainingProxy::CALL_MODE_MIXED);
@@ -31,7 +31,7 @@ class MethodChainingMacros
     public function tapChaining(): \Closure
     {
         /**
-         * @return MethodChainingProxy<$this>|static
+         * @return \Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy<$this>|static
          */
         return function (): MethodChainingProxy {
             return new MethodChainingProxy($this, MethodChainingProxy::CALL_MODE_TAP);
@@ -41,7 +41,7 @@ class MethodChainingMacros
     public function pipeChaining(): \Closure
     {
         /**
-         * @return MethodChainingProxy<$this>|static
+         * @return \Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy<$this>|static
          */
         return function (): MethodChainingProxy {
             return new MethodChainingProxy($this, MethodChainingProxy::CALL_MODE_PIPE);
@@ -52,7 +52,7 @@ class MethodChainingMacros
     {
         /**
          * @param  mixed  $value
-         * @return IfChainingProxy<$this>|static
+         * @return \Liyuze\MethodChainingProxy\Proxies\IfChainingProxy<$this>|static
          */
         return function (mixed $value): IfChainingProxy {
             return new IfChainingProxy($this, boolval(value($value)));
@@ -63,7 +63,7 @@ class MethodChainingMacros
     {
         /**
          * @param  mixed  $value
-         * @return IfChainingProxy<$this>
+         * @return \Liyuze\MethodChainingProxy\Proxies\IfChainingProxy<$this>
          */
         return function (mixed $value): IfChainingProxy {
             return new IfChainingProxy($this, ! boolval(value($value)));

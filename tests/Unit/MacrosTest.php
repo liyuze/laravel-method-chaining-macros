@@ -37,13 +37,13 @@ class MacrosTest extends TestCase
 
     public function test_if_chaining_macro(): void
     {
-        assertSame(2, collect([1, 2])->ifChaining(true)->count()->endIf());
-        assertEquals([1, 2], collect([1, 2])->ifChaining(false)->count()->endIf()->all());
+        assertSame(2, collect([1, 2])->ifChaining(true)->count()->endIfChaining());
+        assertEquals([1, 2], collect([1, 2])->ifChaining(false)->count()->endIfChaining()->all());
     }
 
     public function test_unless_chaining_macro(): void
     {
-        assertSame(2, collect([1, 2])->unlessChaining(false)->count()->endIf());
-        assertEquals([1, 2], collect([1, 2])->unlessChaining(true)->count()->endIf()->all());
+        assertSame(2, collect([1, 2])->unlessChaining(false)->count()->endUnlessChaining());
+        assertEquals([1, 2], collect([1, 2])->unlessChaining(true)->count()->endUnlessChaining()->all());
     }
 }
