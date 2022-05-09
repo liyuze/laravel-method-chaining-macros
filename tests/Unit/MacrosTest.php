@@ -3,7 +3,9 @@
 namespace Liyuze\MethodChainingMacros\Tests\Unit;
 
 use Liyuze\MethodChainingMacros\Tests\TestCase;
+use Liyuze\MethodChainingProxy\Proxies\IfChainingProxy;
 use Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy;
+use Liyuze\MethodChainingProxy\Proxies\SwitchChainingProxy;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertSame;
 
@@ -39,11 +41,30 @@ class MacrosTest extends TestCase
     {
         assertSame(2, collect([1, 2])->ifChaining(true)->count()->endIfChaining());
         assertEquals([1, 2], collect([1, 2])->ifChaining(false)->count()->endIfChaining()->all());
+
+        $coll = collect([1, 2]);
+        assertEquals(new IfChainingProxy($coll, false, 2), $coll->ifChaining(false, 2));
     }
 
     public function test_unless_chaining_macro(): void
     {
         assertSame(2, collect([1, 2])->unlessChaining(false)->count()->endUnlessChaining());
         assertEquals([1, 2], collect([1, 2])->unlessChaining(true)->count()->endUnlessChaining()->all());
+
+        $coll = collect([1, 2]);
+        assertEquals(new IfChainingProxy($coll, false, 2), $coll->ifChaining(false, 2));
+    }
+
+    public function test_switch_chaining_macro(): void
+    {
+        $num = collect([1, 2])->switchChaining(2)
+            ->caseChaining(1)->count()->breakChaining()
+            ->caseChaining(2)->avg()->breakChaining()
+            ->caseChaining(3)->sum()->breakChaining()
+            ->endSwitchChaining();
+        assertSame(1.5, $num);
+
+        $coll = collect([1, 2]);
+        assertEquals(new SwitchChainingProxy($coll, 2, true, 2), $coll->switchChaining(2, true, 2));
     }
 }

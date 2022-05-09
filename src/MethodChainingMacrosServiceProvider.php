@@ -64,6 +64,7 @@ class MethodChainingMacrosServiceProvider extends ServiceProvider
             'pipeChaining'   => $macros->pipeChaining(),
             'ifChaining'     => $macros->ifChaining(),
             'unlessChaining' => $macros->unlessChaining(),
+            'switchChaining' => $macros->switchChaining(),
         ];
     }
 }

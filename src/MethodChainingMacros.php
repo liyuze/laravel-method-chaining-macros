@@ -4,6 +4,7 @@ namespace Liyuze\MethodChainingMacros;
 
 use Liyuze\MethodChainingProxy\Proxies\IfChainingProxy;
 use Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy;
+use Liyuze\MethodChainingProxy\Proxies\SwitchChainingProxy;
 
 class MethodChainingMacros
 {
@@ -11,7 +12,7 @@ class MethodChainingMacros
     {
         /**
          * @param  int  $mode
-         * @return \Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy<$this>|static
+         * @return \Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy<$this>
          */
         return function (int $mode = MethodChainingProxy::CALL_MODE_MIXED): MethodChainingProxy {
             return new MethodChainingProxy($this, $mode);
@@ -21,7 +22,7 @@ class MethodChainingMacros
     public function mixedChaining(): \Closure
     {
         /**
-         * @return \Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy<$this>|static
+         * @return \Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy<$this>
          */
         return function (): MethodChainingProxy {
             return new MethodChainingProxy($this, MethodChainingProxy::CALL_MODE_MIXED);
@@ -31,7 +32,7 @@ class MethodChainingMacros
     public function tapChaining(): \Closure
     {
         /**
-         * @return \Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy<$this>|static
+         * @return \Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy<$this>
          */
         return function (): MethodChainingProxy {
             return new MethodChainingProxy($this, MethodChainingProxy::CALL_MODE_TAP);
@@ -41,7 +42,7 @@ class MethodChainingMacros
     public function pipeChaining(): \Closure
     {
         /**
-         * @return \Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy<$this>|static
+         * @return \Liyuze\MethodChainingProxy\Proxies\MethodChainingProxy<$this>
          */
         return function (): MethodChainingProxy {
             return new MethodChainingProxy($this, MethodChainingProxy::CALL_MODE_PIPE);
@@ -52,10 +53,11 @@ class MethodChainingMacros
     {
         /**
          * @param  mixed  $value
-         * @return \Liyuze\MethodChainingProxy\Proxies\IfChainingProxy<$this>|static
+         * @param  int  $callMode
+         * @return \Liyuze\MethodChainingProxy\Proxies\IfChainingProxy<$this>
          */
-        return function (mixed $value): IfChainingProxy {
-            return new IfChainingProxy($this, boolval(value($value)));
+        return function (mixed $value, int $callMode = MethodChainingProxy::CALL_MODE_MIXED): IfChainingProxy {
+            return new IfChainingProxy($this, boolval(value($value)), $callMode);
         };
     }
 
@@ -63,10 +65,24 @@ class MethodChainingMacros
     {
         /**
          * @param  mixed  $value
+         * @param  int  $callMode
          * @return \Liyuze\MethodChainingProxy\Proxies\IfChainingProxy<$this>
          */
-        return function (mixed $value): IfChainingProxy {
-            return new IfChainingProxy($this, ! boolval(value($value)));
+        return function (mixed $value, int $callMode = MethodChainingProxy::CALL_MODE_MIXED): IfChainingProxy {
+            return new IfChainingProxy($this, ! boolval(value($value)), $callMode);
+        };
+    }
+
+    public function switchChaining(): \Closure
+    {
+        /**
+         * @param mixed $value
+         * @param  bool  $isStrict
+         * @param  int  $callMode
+         * @return \Liyuze\MethodChainingProxy\Proxies\SwitchChainingProxy<$this>
+         */
+        return function (mixed $value, bool $isStrict = false, int $callMode = MethodChainingProxy::CALL_MODE_MIXED): SwitchChainingProxy {
+            return new SwitchChainingProxy($this, $value, $isStrict, $callMode);
         };
     }
 }
