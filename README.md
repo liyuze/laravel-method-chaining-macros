@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/liyuze/laravel-method-chaining-macros.svg?style=flat-square)](https://packagist.org/packages/liyuze/laravel-method-chaining-macros)
 [![Total Downloads](https://img.shields.io/packagist/dt/liyuze/laravel-method-chaining-macros.svg?style=flat-square)](https://packagist.org/packages/liyuze/laravel-method-chaining-macros)
-![GitHub Actions](https://github.com/liyuze/laravel-method-chaining-macros/actions/workflows/main.yml/badge.svg)
+[![PHP Composer & Test](https://github.com/liyuze/laravel-method-chaining-macros/actions/workflows/php.yml/badge.svg?branch=main&event=push)](https://github.com/liyuze/laravel-method-chaining-macros/actions/workflows/php.yml)
 
 此扩展包是针对对 `liyuze/method-chaining-proxy` 在 laravel 框架补充，通过 marcoable 特性的类快速创建方法链式调用代理器。
 
